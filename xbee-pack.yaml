@@ -1,0 +1,40 @@
+schema-version: 1.0
+
+type: builder
+
+description: |
+  The Intltool is an internationalization tool used for extracting translatable strings from source files.
+  Installed programs:
+    intltool-extract, intltool-merge, intltool-prepare, intltool-update, and intltoolize
+  Installed directories:
+    /usr/share/doc/intltool-0.51.0 and /usr/share/intltool
+  
+  Short Descriptions
+  intltoolize: Prepares a package to use intltool
+  intltool-extract: Generates header files that can be read by gettext
+  intltool-merge: Merges translated strings into various file types
+  intltool-prepare: Updates pot files and merges them with translation files
+  intltool-update: Updates the po template files and merges them with the translations
+
+
+var:
+  version: 0.51.0
+
+dependencies:
+  - xmlparser
+
+provision:
+  - url:
+      from: https://launchpad.net/intltool/trunk/{{ .version }}/+download/intltool-{{ .version }}.tar.gz
+      todir: "{{ .xbee.src }}"
+
+build:
+  - shell:
+      cmds:
+        - ./configure --prefix=/usr
+        - make
+        - make install DESTDIR={{ .xbee.out }}
+        - install -v -Dm644 doc/I18N-HOWTO {{ .xbee.out }}/usr/share/doc/intltool-0.51.0/I18N-HOWTO
+      directory: "{{ .xbee.src }}/intltool-{{ .version }}"
+
+
