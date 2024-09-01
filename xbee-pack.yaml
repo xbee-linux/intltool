@@ -18,13 +18,14 @@ description: |
 
 
 var:
-  version: 0.51.0
+  xbee:
+    version: 0.51.0
 
 builders:
   - xmlparser
 
 provision:
-  url: https://launchpad.net/intltool/trunk/{{ .version }}/+download/intltool-{{ .version }}.tar.gz
+  url: https://launchpad.net/intltool/trunk/{{ .xbee.version }}/+download/intltool-{{ .xbee.version }}.tar.gz
 
 build:
   - shell:
@@ -33,6 +34,6 @@ build:
         - make
         - make install DESTDIR={{ .xbee.out }}
         - install -v -Dm644 doc/I18N-HOWTO {{ .xbee.out }}/usr/share/doc/intltool-0.51.0/I18N-HOWTO
-      directory: "{{ .xbee.src }}/intltool-{{ .version }}"
+      directory: "{{ .xbee.src }}/intltool-{{ .xbee.version }}"
 
 
