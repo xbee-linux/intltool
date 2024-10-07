@@ -1,7 +1,5 @@
 schema-version: 1.0
 
-type: builder
-
 description: |
   The Intltool is an internationalization tool used for extracting translatable strings from source files.
   Installed programs:
@@ -21,8 +19,7 @@ var:
   xbee:
     version: 0.51.0
 
-builders:
-  - xmlparser
+builder: xmlparser
 
 provision:
   url: https://launchpad.net/intltool/trunk/{{ .xbee.version }}/+download/intltool-{{ .xbee.version }}.tar.gz
